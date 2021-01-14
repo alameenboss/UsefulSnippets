@@ -1,0 +1,29 @@
+SELECT Col.TABLE_NAME,Col.CONSTRAINT_NAME,Col.COLUMN_NAME,Constraint_Type from 
+INFORMATION_SCHEMA.TABLE_CONSTRAINTS Tab, 
+INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE Col 
+WHERE 
+Col.Constraint_Name = Tab.Constraint_Name
+AND Col.Table_Name = Tab.Table_Name
+AND Constraint_Type = 'PRIMARY KEY'
+order by Tab.Table_Name
+
+/*
+
+
+SELECT
+'ALTER TABLE '+ Col.TABLE_NAME +'
+Drop CONSTRAINT ' + Col.CONSTRAINT_NAME +'
+ALTER TABLE '+ Col.TABLE_NAME +'
+ADD CONSTRAINT PK__'+Col.TABLE_NAME+' PRIMARY KEY ('+Col.COLUMN_NAME+');' 
+ from 
+INFORMATION_SCHEMA.TABLE_CONSTRAINTS Tab, 
+INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE Col 
+WHERE 
+Col.Constraint_Name = Tab.Constraint_Name
+AND Col.Table_Name = Tab.Table_Name
+AND Constraint_Type = 'PRIMARY KEY'
+Order by Col.TABLE_NAME
+
+*/
+
+
